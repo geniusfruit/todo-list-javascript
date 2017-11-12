@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="css/todo.css">
+</head>
+<body>
+  <h1>Todo List</h1>
+  <div class="container">
+    <div class="task">
+      <input type="text" id="task" placeholder="What needs to be done ?">
+        <button id="add">Add</button>
+    </div>
+    <div class="bar" id="bar">
+      <div class="col-1-4">
+        <span class="total" id="total">0 items left</span>
+      </div>
+      <div class="col-1-2">
+        <ul class="filter" id="filters">
+          <li><div id="pipeline" class="button selected">Tasks</div></li>
+          <li><div id="completed" class="button">Completed</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="list" id="todos"></div>
+    </div>
+  </div>
+  <script src="js/model.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/controller.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
