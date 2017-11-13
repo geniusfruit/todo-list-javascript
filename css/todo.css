@@ -58,7 +58,7 @@ h1 {
   width: 30%;
 }
 
-.bar {
+.item-left {
   color: #6C6777;
   background: #eee;
   border-top: solid 1px #ddd;
@@ -168,9 +168,13 @@ h1 {
   color: #fff;
   background-color: #d9534f;
   border-color: #d43f3a;
+  border: 2px solid;
+   border-radius: 25px;
 }
 .done {
   color: #fff;
 background-color: #5bc0de;
 border-color: #46b8da;
+border: 2px solid;
+ border-radius: 25px;
 }
