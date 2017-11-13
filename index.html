@@ -6,27 +6,15 @@
   <link rel="stylesheet" href="css/todo.css">
 </head>
 <body>
-  <h1>Task</h1>
-  <div class="container">
-    <div class="task">
-      <input type="text" id="task" placeholder="+ Add task">
-        <button id="add">Add</button>
-    </div>
-    <div class="item-left" id="item-left">
-      <div class="col-1-4">
-        <span class="total" id="total">0 items left</span>
-      </div>
-      <div class="col-1-2">
-        <ul class="filter" id="filters">
-          <li><div id="activeTask" class="button selected">Tasks</div></li>
-          <li><div id="completed" class="button">Completed</div></li>
-        </ul>
-      </div>
-    </div>
-    <div class="row">
-      <div class="list" id="todos"></div>
-    </div>
+  <div id="header" class="header">
+    <h2 style="margin:5px">My To Do List</h2>
+    <input type="text" id="task" placeholder="+ Add Task">
+    <span class="add" id="add">Add</span>
   </div>
+
+  <ul id="todos">
+    <li>+ Add Task</li>
+  </ul>
   <script src="js/model.js"></script>
   <script src="js/view.js"></script>
   <script src="js/controller.js"></script>

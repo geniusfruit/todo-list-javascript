@@ -15,8 +15,8 @@ Controller.prototype.remove = function(id){
   this.model.removeTodo(id);
   this.view.show();
 };
-Controller.prototype.completed = function(id){
-  this.model.setCompletedTodos(id);
+Controller.prototype.completed = function(id,isCompleted){
+  this.model.setCompletedTodos(id,isCompleted);
   this.view.show();
 };
 Controller.prototype.saveFilterType = function(filterType){
