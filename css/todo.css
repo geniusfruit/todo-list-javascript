@@ -1,5 +1,5 @@
 body {
-  margin: auto 100px;
+  background: #EEEEEE;
 }
 
 /* Include the padding and border in an element's total width and height */
@@ -7,6 +7,29 @@ body {
   box-sizing: border-box;
 }
 
+.container {
+  margin: auto 100px;
+}
+.input-section {
+  margin: auto 10%;
+  padding-bottom: 20px;
+}
+.panel {
+    margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.panel-body {
+  padding: 15px;
+}
+.panel-header {
+  height:20px;
+  border-bottom: 2px solid grey;
+}
 /* Remove margins and padding from the list */
 ul {
   margin: 0;
@@ -19,10 +42,10 @@ ul li {
   position: relative;
   padding: 12px 8px 12px 40px;
   list-style-type: none;
-  background: #eee;
+  /*background: #eee;*/
   font-size: 18px;
   transition: 0.2s;
-
+      border-bottom: 1px dashed #eaeaea;
   /* make the list items unselectable */
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -31,27 +54,28 @@ ul li {
 }
 
 /* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
+/*ul li:nth-child(odd) {
   background: #f9f9f9;
-}
+}*/
 
 /* Darker background-color on hover */
 ul li:hover {
-  background: #ddd;
+  background: #e6e6e6;
 }
 
 /* When clicked on, add a background color and strike out text */
 ul li.checked {
-  background: #888;
-  color: #fff;
+  background: #f6f6f6;
   text-decoration: line-through;
+  color: #bbbbbb;
+  border-bottom: 2px solid white;
 }
 
 /* Add a "checked" mark when clicked on */
 ul li.checked::before {
   content: '';
   position: absolute;
-  border-color: #fff;
+  border-color: #bbbbbb;
   border-style: solid;
   border-width: 0 2px 2px 0;
   top: 10px;
@@ -77,7 +101,7 @@ ul li.checked::before {
 /* Style the header */
 .header {
   background-color: #5bc0de;
-  padding: 30px 40px;
+  padding: 10px 40px;
   color: white;
   text-align: center;
 }
@@ -94,7 +118,7 @@ input {
   border: none;
   width: 75%;
   padding: 10px;
-  float: left;
+  /*float: left;*/
   font-size: 16px;
 }
 
@@ -103,8 +127,8 @@ input {
   padding: 10px;
   width: 25%;
   background: #5cb85c;
-  color: #555;
-  float: left;
+  color: white;
+  /*float: left;*/
   text-align: center;
   font-size: 16px;
   cursor: pointer;
@@ -113,4 +137,11 @@ input {
 
 .add:hover {
   background-color: #bbb;
+}
+.total {
+  padding: 10px 10px 10px 20px;
+  font-size : 20px;
+  background-color:white;
+  color: black;
+  border-bottom: 2px solid grey;
 }
