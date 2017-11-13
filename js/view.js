@@ -36,11 +36,11 @@ View.prototype.show = function(){
   if(todos){
     var html = '';
     for(var i=0; i<todos.length; i++) {
-        html += '<div class="list-item">' + todos[i] ;
+        html += '<div class="list-item"><div class="task-text">' + todos[i] +'</div><div class="btn-section">' ;
         if(isActiveTodo){
           html += '<button class="done" id="' + i  + '">Done</button>';
         }
-        html += '<button class="remove" id="' + i  + '">Remove</button></div>';
+        html += '<button class="remove" id="' + i  + '">Remove</button></div></div>';
     };
     this.todosEl.innerHTML = html;
     var _this = this;
