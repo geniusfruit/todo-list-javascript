@@ -11,14 +11,12 @@ html {
 body {
   margin: 0 auto;
   font-size: 100%;
-  font-family: 'Roboto Slab', serif;
   color: #fff;
   background: black;
 }
 
 ::-webkit-input-placeholder {
   color: #3C3647;
-  font-style: italic;
 }
 
 h1 {
@@ -115,8 +113,8 @@ h1 {
 
 .total {
   display: inline-block;
-  float: left;
   margin-top: 4px;
+  margin-left: 10px;
 }
 
 .filter {
@@ -165,6 +163,12 @@ h1 {
 }
 .task-text {
   padding-left:5px;
+  width: 65%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.strikeText {
+  text-decoration: line-through;
 }
 .btn-section {
   position: absolute;

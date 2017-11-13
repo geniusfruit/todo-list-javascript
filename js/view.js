@@ -36,7 +36,7 @@ View.prototype.show = function(){
   if(todos){
     var html = '';
     for(var i=0; i<todos.length; i++) {
-        html += '<div class="list-item"><div class="task-text">' + todos[i] +'</div><div class="btn-section">' ;
+        html += '<div class="list-item"><div class="'+((isActiveTodo)?"task-text":"task-text strikeText")+'">' + todos[i] +'</div><div class="btn-section">' ;
         if(isActiveTodo){
           html += '<button class="done" id="' + i  + '">Done</button>';
         }
