@@ -6,66 +6,71 @@ function View(model, controller){
   this.todosEl = document.getElementById('todos');
   this.addBtn = document.getElementById('add');
   var self = this;
-  this.show();
-
-  this.addBtn.onclick = function(){
+  this.addBtn.addEventListener('click', function(ev) {
     self.addTask();
-  }
+  }, false);
+
   // Add a "checked" symbol when clicking on a list item
   var list = document.querySelector('ul');
-  list.addEventListener('click', function(ev) {
+  utils.addEventListener(list,'click', function(ev) {
+    ev.preventDefault();
     if (ev.target.tagName === 'LI') {
       var isCompleted = true;
       if(ev.target.classList.contains("checked")){
         isCompleted = false;
       }
-      // ev.target.classList.toggle('checked');
       self.completed(ev.target.id,isCompleted);
+      // ev.target.classList.toggle('checked');
     }
   }, false);
-  window.addEventListener("keydown", function (e) {
+  utils.addEventListener(window,"keydown", function (e) {
     if ((e.keyCode || e.which) == 13) { // 13 is the keycode for "enter"
       add.click();
     }
   });
 }
 View.prototype.show = function(){
-  var todos = this.model.getActiveTodos();
+  var todos = this.model.todos;
   this.todosEl.innerHTML = '';
   this.total.innerHTML = "0 items left";
   var completedTaskLength = 0;
+  var _this = this;
   if(todos && todos.length>0){
-    var html = '';
-    this.todosEl.innerHTML = '';
     for(var i=0; i<todos.length; i++) {
-      var li = document.createElement("li");
-      var t = document.createTextNode(todos[i].task);
-      li.id = i;
       if(todos[i].completed){
-          li.className= "checked";
           completedTaskLength++;
       }
-      li.appendChild(t);
-      this.todosEl.appendChild(li);
-      var span = document.createElement("SPAN");
-      var txt = document.createTextNode("\u00D7");
-      span.className = "close";
-      span.id = i;
-      span.appendChild(txt);
-      li.appendChild(span);
+      this.createTaskEl(todos, i,_this);
     };
-    var _this = this;
-    var removeBtns = document.getElementsByClassName('close');
-    var completedBtns = document.getElementsByClassName('checkme');
-    for (var i=0; i < removeBtns.length; i++) {
-        removeBtns[i].addEventListener('click', function(e){
-          var id = e.target.id;
-         _this.remove(id);
-        });
-    };
-    this.total.innerHTML = (todos.length - completedTaskLength) +" items left";
-    this.clearInput();
+    var totalText = (todos.length - completedTaskLength) +" items left";
+    utils.setTextContent(this.total,totalText);
+    //this.total.innerHTML = (todos.length - completedTaskLength) +" items left";
   }
+};
+View.prototype.createTaskEl = function(todos,i,_this){
+  var li = document.getElementById('templateTask').cloneNode(true);
+  //var li = document.createElement("li");
+  //var t = document.createTextNode(todos[i].task);
+  //utils.setTextContent( li,todos[i].task) ;
+  li.id = i;
+  if(todos[i].completed){
+      li.className= "checked";
+  }
+  //li.appendChild(t);
+  utils.setTextContent( li,todos[i].task) ;
+  this.todosEl.appendChild(li);
+  //var span = document.createElement("SPAN");
+  var span = document.getElementById('closeBtnTemplate').cloneNode(true);
+  utils.setTextContent( span,"\u00D7") ;
+  //var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.id = i;
+  span.addEventListener('click', function(e){
+    var id = e.target.id;
+   _this.remove(id);
+  });
+  //span.appendChild(txt);
+  li.appendChild(span);
 };
 View.prototype.clearInput= function () {
     this.task.value = "";
@@ -79,10 +84,11 @@ View.prototype.completed= function (id,isCompleted) {
 View.prototype.addTask = function(){
   var task = this.task.value;
   this.controller.save(task);
+  this.clearInput();
 };
 Object.defineProperty(View.prototype, "message",{
   set: function(message){
-    var todos = document.getElementById("todos");
+    var msg = document.getElementById("msg");
     todos.innerHTML = message;
   },
   enumerable:true,
