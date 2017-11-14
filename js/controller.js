@@ -3,6 +3,7 @@ function Controller(){}
 Controller.prototype.init = function(model,view){
   this.model = model;
   this.view = view;
+  this.view.show();
 };
 
 Controller.prototype.save = function(task){
@@ -17,9 +18,5 @@ Controller.prototype.remove = function(id){
 };
 Controller.prototype.completed = function(id,isCompleted){
   this.model.setCompletedTodos(id,isCompleted);
-  this.view.show();
-};
-Controller.prototype.saveFilterType = function(filterType){
-  this.model.filterType=filterType;
   this.view.show();
 };

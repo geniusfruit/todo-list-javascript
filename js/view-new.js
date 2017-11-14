@@ -5,7 +5,6 @@ function View(model, controller){
   this.total = document.getElementById('total');
   this.todosEl = document.getElementById('todos');
   this.addBtn = document.getElementById('add');
-  this.show();
   var self = this;
   this.addBtn.addEventListener('click', function(ev) {
     self.addTask();
@@ -13,7 +12,7 @@ function View(model, controller){
 
   // Add a "checked" symbol when clicking on a list item
   var list = document.querySelector('ul');
-  list.addEventListener('click', function(ev) {
+  utils.addEventListener(list,'click', function(ev) {
     ev.preventDefault();
     if (ev.target.tagName === 'LI') {
       var isCompleted = true;
@@ -24,7 +23,7 @@ function View(model, controller){
       // ev.target.classList.toggle('checked');
     }
   }, false);
-  window.addEventListener("keydown", function (e) {
+  utils.addEventListener(window,"keydown", function (e) {
     if ((e.keyCode || e.which) == 13) { // 13 is the keycode for "enter"
       add.click();
     }
@@ -38,30 +37,40 @@ View.prototype.show = function(){
   var _this = this;
   if(todos && todos.length>0){
     for(var i=0; i<todos.length; i++) {
-      var li = document.createElement("li");
-      var t = document.createTextNode(todos[i].task);
-      li.id = i;
       if(todos[i].completed){
-          li.className= "checked";
           completedTaskLength++;
       }
-      li.appendChild(t);
-      this.todosEl.appendChild(li);
-      var span = document.createElement("SPAN");
-      var txt = document.createTextNode("\u00D7");
-      span.className = "close";
-      span.id = i;
-      span.addEventListener('click', function(e){
-        var id = e.target.id;
-       _this.remove(id);
-      });
-      span.appendChild(txt);
-      li.appendChild(span);
+      this.createTaskEl(todos, i,_this);
     };
     var totalText = (todos.length - completedTaskLength) +" items left";
     utils.setTextContent(this.total,totalText);
     //this.total.innerHTML = (todos.length - completedTaskLength) +" items left";
   }
+};
+View.prototype.createTaskEl = function(todos,i,_this){
+  var li = document.getElementById('templateTask').cloneNode(true);
+  //var li = document.createElement("li");
+  //var t = document.createTextNode(todos[i].task);
+  //utils.setTextContent( li,todos[i].task) ;
+  li.id = i;
+  if(todos[i].completed){
+      li.className= "checked";
+  }
+  //li.appendChild(t);
+  utils.setTextContent( li,todos[i].task) ;
+  this.todosEl.appendChild(li);
+  //var span = document.createElement("SPAN");
+  var span = document.getElementById('closeBtnTemplate').cloneNode(true);
+  utils.setTextContent( span,"\u00D7") ;
+  //var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.id = i;
+  span.addEventListener('click', function(e){
+    var id = e.target.id;
+   _this.remove(id);
+  });
+  //span.appendChild(txt);
+  li.appendChild(span);
 };
 View.prototype.clearInput= function () {
     this.task.value = "";

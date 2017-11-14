@@ -1,5 +1,6 @@
 function Model(){
   this.todos = getTodos();
+  this.todosEl = [];
   function getTodos(){
     var todos = this.todos || new Array;
     var todos_str = localStorage.getItem("todos");
@@ -8,6 +9,9 @@ function Model(){
     }
     return todos;
   }
+}
+Model.prototype.addTodosEl = function(el) {
+    this.todosEl.push(el);
 }
 Model.prototype.setActiveTodos = function(task) {
     var todos = this.todos;
@@ -32,7 +36,6 @@ Model.prototype.setCompletedTodos = function(id,isCompleted) {
 }
 Model.prototype.removeTodo = function(id) {
     var todos = this.todos;
-    var storeKey = 0;
     todos.splice(id, 1);
     this.todos = todos;
     localStorage.setItem("todos", JSON.stringify(todos));
